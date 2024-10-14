@@ -1,30 +1,41 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+    <div class="app_container">
+        <LoginView />
+        <!-- <ManagerView /> -->
+         {{ authClient.role }}
+    </div>
+
 </template>
 
+<script setup>
+import LoginView from './views/LoginView.vue'
+import ManagerView from './views/ManagerView.vue'
+import { computed,ref } from 'vue';
+import { useStore } from 'vuex'
+
+const store = useStore();
+
+const currentRole = ref("")
+const authClient = computed(()=>{
+    return store.state.authCustomer
+})
+
+
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+*{
+    margin: 0;
+        padding: 0;
+        box-sizing: border-box;
 }
+    .app_container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        width: 100%;
+    }
 
-nav {
-  padding: 30px;
-}
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
